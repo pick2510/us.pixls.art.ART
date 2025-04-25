@@ -305,9 +305,9 @@ modules:
       - install -Dm644 ../us.pixls.art.ART.metainfo.xml -t $FLATPAK_DEST/share/metainfo
     sources:
       - type: archive
-        url: https://github.com/artpixls/ART/releases/download/1.25.3.1/ART-1.25.3.1.tar.xz
-        sha256: 0392487f5bea8de3b6329da239dddee88c3a969ebd414b293bce1b8df6ac25cd
+        url: https://github.com/artpixls/ART/releases/download/1.25.4/ART-1.25.4.tar.xz
+        sha256: 5f862fd984c2c2fb9903a968aef25faadf2817d6f4a2ff1b51a6798b11b64edc
       - type: patch
-        path: patches/art-appid.patch
+        path: patches/art-appstream.patch
       - type: file
         path: us.pixls.art.ART.metainfo.xml
