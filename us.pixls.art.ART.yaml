@@ -302,12 +302,10 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCACHE_NAME_SUFFIX=""
     post-install:
-      - install -Dm644 ../us.pixls.art.ART.metainfo.xml -t $FLATPAK_DEST/share/metainfo
+      - install -Dm644 $FLATPAK_DEST/share/ART/metainfo/us.pixls.art.ART.metainfo.xml -t $FLATPAK_DEST/share/metainfo/
     sources:
       - type: archive
-        url: https://github.com/artpixls/ART/releases/download/1.25.4/ART-1.25.4.tar.xz
-        sha256: 5f862fd984c2c2fb9903a968aef25faadf2817d6f4a2ff1b51a6798b11b64edc
+        url: https://github.com/artpixls/ART/releases/download/1.25.5/ART-1.25.5.tar.xz
+        sha256: c4f8eb3fb7d363c6efef6a63997710e63fcb5997f2811c2fecae00e443529a1e
       - type: patch
         path: patches/art-appstream.patch
-      - type: file
-        path: us.pixls.art.ART.metainfo.xml
