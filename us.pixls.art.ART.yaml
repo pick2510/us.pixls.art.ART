@@ -148,7 +148,7 @@ modules:
       - type: git
         dest: lensfun-git
         url: https://github.com/lensfun/lensfun.git
-        commit: eaacdabe347cde60a1139664cccc80f773e5cd11
+        commit: fcbfbf38e5c297fc5595705c2e61ff5b3eaeb9d9
 
   - name: libiptcdata
     config-opts:
@@ -305,7 +305,7 @@ modules:
       - install -Dm644 $FLATPAK_DEST/share/ART/metainfo/us.pixls.art.ART.metainfo.xml -t $FLATPAK_DEST/share/metainfo/
     sources:
       - type: archive
-        url: https://github.com/artpixls/ART/releases/download/1.25.5/ART-1.25.5.tar.xz
-        sha256: c4f8eb3fb7d363c6efef6a63997710e63fcb5997f2811c2fecae00e443529a1e
+        url: https://github.com/artpixls/ART/releases/download/1.25.6/ART-1.25.6.tar.xz
+        sha256: b3f6859d0944d3c038ced54367a787af0b6051df0f28e9bfa1ecebb9c5183a2d
       - type: patch
         path: patches/art-appstream.patch

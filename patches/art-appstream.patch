@@ -2,10 +2,11 @@ diff --git a/rtdata/us.pixls.art.ART.metainfo.xml b/rtdata/us.pixls.art.ART.meta
 index cf21041..70c4240 100644
 --- a/rtdata/us.pixls.art.ART.metainfo.xml
 +++ b/rtdata/us.pixls.art.ART.metainfo.xml
-@@ -33,6 +33,8 @@
+@@ -33,6 +33,9 @@
      </screenshots>
      <update_contact>_hub_AT_figuiere_net_</update_contact>
      <releases>
++        <release version="1.25.6" date="2025-06-20"></release>
 +        <release version="1.25.5" date="2025-05-26"></release>
 +        <release version="1.25.4" date="2025-04-24"></release>
          <release version="1.25.3.1" date="2025-03-07"></release>
