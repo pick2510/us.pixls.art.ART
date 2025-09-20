@@ -1,6 +1,6 @@
 id: us.pixls.art.ART
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: ART
 rename-desktop-file: ART.desktop
@@ -127,6 +127,7 @@ modules:
     build-options:
       cxxflags: -fpermissive
     config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     post-install:
       - pip3 install --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} lxml --ignore-installed
@@ -159,6 +160,8 @@ modules:
       - type: archive
         url: https://github.com/ianw/libiptcdata/archive/release_1_0_5.tar.gz
         sha256: 78a5c49b646cb610c84bc4dfc730caad9a06e9b4e295600908782f4abb25316e
+      - type: patch
+        path: patches/libiptcdata-no-gtkdoc.patch
       - type: shell
         commands:
           - cp -p /usr/share/automake-*/config.{sub,guess} .;
@@ -197,6 +200,7 @@ modules:
       - /share/pkgconfig
       - /share/cmake
     config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_SHARED_LIBS=ON
       - -DYAML_BUILD_SHARED_LIBS=ON
@@ -205,8 +209,11 @@ modules:
       - -DYAML_CPP_BUILD_CONTRIB=OFF
     sources:
       - type: archive
-        url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.tar.gz
-        sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
+        url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/0.8.0.tar.gz
+        sha256: fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16
+      - type: patch
+        paths:
+          - patches/yamlcpp-stdint.patch
 
   - name: imath
     buildsystem: cmake-ninja

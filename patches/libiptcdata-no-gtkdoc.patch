@@ -1,0 +1,72 @@
+diff --git a/Makefile.am b/Makefile.am
+index 192529a..ae8aa25 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -2,7 +2,7 @@ if PYTHONLIB
+ MAYBE_PYTHONLIB = python
+ endif
+ 
+-SUBDIRS = m4 libiptcdata po iptc docs win $(MAYBE_PYTHONLIB)
++SUBDIRS = m4 libiptcdata po iptc win $(MAYBE_PYTHONLIB)
+ 
+ EXTRA_DIST = @PACKAGE@.spec
+ 
+diff --git a/autogen.sh b/autogen.sh
+index 19aa40b..5154d99 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -24,14 +24,6 @@ if $have_libtool ; then : ; else
+ 	DIE=1
+ fi
+ 
+-(gtkdocize --version) < /dev/null > /dev/null 2>&1 || {
+-	echo
+-	echo "You must have gtk-doc installed to compile $PROJECT."
+-	echo "Install the appropriate package for your distribution,"
+-	echo "or get the source tarball at ftp://ftp.gnome.org/pub/GNOME/sources/gtk-doc/"
+-	DIE=1
+-}
+-
+ (autoconf --version) < /dev/null > /dev/null 2>&1 || {
+ 	echo
+ 	echo "You must have autoconf installed to compile $PROJECT."
+@@ -73,8 +65,6 @@ ACLOCAL_FLAGS="-I m4"
+ rm -rf autom4te.cache
+ 
+ 
+-gtkdocize || exit $?
+-
+ autopoint || exit $?
+ $ACLOCAL $ACLOCAL_FLAGS || exit $?
+ libtoolize --force || exit $?
+@@ -82,7 +72,6 @@ $ACLOCAL $ACLOCAL_FLAGS || exit $?
+ autoconf || exit $?
+ autoheader || exit $?
+ $AUTOMAKE --add-missing || exit $?
+-gtkdocize || exit $?
+ 
+ cd $ORIGDIR || exit $?
+ 
+diff --git a/configure.ac b/configure.ac
+index 74ce1c3..7c98653 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -75,7 +75,7 @@ dnl Check for headers (Mac OSX often doesn't have them)
+ AC_CHECK_HEADERS([getopt.h wchar.h iconv.h])
+ 
+ 
+-GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
++dnl GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
+ AC_CONFIG_MACRO_DIR(m4)
+ 
+ dnl ---------------------------------------------------------------------------
+@@ -95,9 +95,6 @@ AC_OUTPUT([
+   m4/Makefile
+   libiptcdata/libiptcdata.pc
+   iptc/Makefile
+-  docs/Makefile
+-  docs/reference/Makefile
+-  docs/reference/version.xml
+   po/Makefile.in
+   iptc/po/Makefile.in
+   win/Makefile
