@@ -130,13 +130,14 @@ modules:
       - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     post-install:
-      - pip3 install --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} lxml --ignore-installed
+      - pip3 install --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        lxml --ignore-installed
       - python3 lensfun_convert_db.py $PWD lensfun-git/data/db
       - rm -rf /app/share/lensfun/version_1/*
       - tar xvf db/version_1.tar -C /app/share/lensfun/version_1
     cleanup:
       - /bin
-      - '/lib/python3.*'
+      - /lib/python3.*
     sources:
       - type: archive
         url: https://github.com/lensfun/lensfun/archive/refs/tags/v0.3.4.tar.gz
@@ -236,13 +237,12 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
-        sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/4.0.10.tar.gz
+        sha256: c362e35ee973fa7be58cc5e38a4a6c23cc8f7e652555daf4f115a9eb2d3a6be7
   - name: opencolorio
     buildsystem: cmake-ninja
     builddir: true
     build-options:
-      cxxflags: -Wno-error=unused-function -Wno-error=deprecated-declarations -Wno-error=cast-function-type
       arch:
         aarch64:
           config-opts:
@@ -263,8 +263,8 @@ modules:
       - -DOCIO_INSTALL_EXT_PACKAGES=NONE
     sources:
       - type: archive
-        url: https://github.com/imageworks/OpenColorIO/archive/v2.4.2.tar.gz
-        sha256: 2d8f2c47c40476d6e8cea9d878f6601d04f6d5642b47018eaafa9e9f833f3690
+        url: https://github.com/imageworks/OpenColorIO/archive/v2.5.0.tar.gz
+        sha256: 124e2bfa8a9071959d6ddbb64ffbf78d3f6fe3c923ae23e96a6bbadde1af55b6
         x-checker-data:
           type: anitya
           project-id: 9631
@@ -279,7 +279,7 @@ modules:
       - --enable-lcms
       - --enable-openmp
     cleanup:
-      - "/share/doc"
+      - /share/doc
     sources:
       - type: archive
         url: https://www.libraw.org/data/LibRaw-0.21.3.tar.gz
@@ -309,7 +309,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCACHE_NAME_SUFFIX=""
     post-install:
-      - install -Dm644 $FLATPAK_DEST/share/ART/metainfo/us.pixls.art.ART.metainfo.xml -t $FLATPAK_DEST/share/metainfo/
+      - install -Dm644 $FLATPAK_DEST/share/ART/metainfo/us.pixls.art.ART.metainfo.xml
+        -t $FLATPAK_DEST/share/metainfo/
     sources:
       - type: archive
         url: https://github.com/artpixls/ART/releases/download/1.25.9/ART-1.25.9.tar.xz
