@@ -211,6 +211,13 @@ modules:
   - shared-modules/linux-audio/fftw3f.json
   - shared-modules/libcanberra/libcanberra.json
 
+  - name: inih
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://github.com/benhoyt/inih/archive/refs/tags/r62.tar.gz
+        sha256: 9c15fa751bb8093d042dae1b9f125eb45198c32c6704cd5481ccde460d4f8151
+
   - name: exiv2
     buildsystem: cmake-ninja
     config-opts:
@@ -221,8 +228,8 @@ modules:
       - -DEXIV2_BUILD_SAMPLES=OFF
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.7/exiv2-0.27.7-Source.tar.gz
-        sha256: 70629dc27e3d4dd5c3fa91afbea93166d338b1de284e6a4c44bbf9dcfe7bbc6d
+        url: https://github.com/Exiv2/exiv2/archive/refs/tags/v0.28.7.tar.gz 
+        sha256: 5e292b02614dbc0cee40fe1116db2f42f63ef6b2ba430c77b614e17b8d61a638
   # OpenColorIO deps
   - name: pystring
     buildsystem: cmake-ninja
@@ -328,6 +335,38 @@ modules:
       - type: git
         url: https://github.com/microsoft/mimalloc
         tag: v2.1.7
+  - name: exiftool
+    buildsystem: simple
+    build-commands:
+      - perl Makefile.PL
+      - make install
+    sources:
+      - type: git
+        url: https://github.com/exiftool/exiftool.git
+        tag: 13.39
+        commit: a127e750f9359f01c44a7e705e7d0b32a253a4ea
+    modules:
+      - name: perl
+        no-autogen: true
+        config-opts:
+          - '-des'
+          - '-Duseshrplib'
+        build-options:
+          cflags: "-fPIC"
+          ldflags: "-fpic"
+        cleanup:
+          - "*.h"
+        post-install:
+          - find ${FLATPAK_DEST}/lib/perl5/ -name \*.so -exec chmod u+w {} \;
+        sources:
+          - type: git
+            url: https://github.com/Perl/perl5.git
+            tag: v5.42.0
+            commit: 5551b97c3be30b899397b99d57993a39d13294f1
+          - type: script
+            dest-filename: configure
+            commands:
+              - exec ./configure.gnu $@
 
   - name: art
     buildsystem: cmake-ninja
